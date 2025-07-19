@@ -1,0 +1,8 @@
+{
+  "name": "api",
+  "scripts": {
+    "dev": "uv run scripts/dev.py",
+    "build": "uv run scripts/build.py",
+    "start": "uv run scripts/start.py"
+  }
+}

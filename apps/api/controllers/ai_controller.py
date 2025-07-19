@@ -1,8 +1,8 @@
-from fastapi import FastAPI
 from openai import OpenAI
 import os
 from dotenv import load_dotenv
 from typing import Generator
+import time
 
 load_dotenv()
 
@@ -11,9 +11,8 @@ client = OpenAI(
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 
-app = FastAPI()
 
-def stream_chat_response() -> Generator[str, None, None]:
+def stream_chat_response(prompt: str) -> Generator[str, None, None]:
     """
     Generates a stream of chat responses using the OpenAI API.
 
@@ -29,7 +28,7 @@ def stream_chat_response() -> Generator[str, None, None]:
         model="gemini-2.0-flash",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": "Hello!"}
+            {"role": "user", "content": prompt}
         ],
         stream=True
     )
