@@ -1,3 +1,3 @@
 import subprocess
 
-subprocess.run(["uvicorn", "app.main:app", "--reload"])
+subprocess.run(["uvicorn", "main:app", "--reload"])
