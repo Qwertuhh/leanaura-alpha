@@ -1,8 +1,7 @@
 import type {appTheme} from "@/types";
-// @ts-ignore
-import type { Theme } from "@excalidraw/excalidraw";
+import type { Theme } from "@/components/theme-provider";
 
-function themeCasting(theme: appTheme) : Theme{
+function themeCasting(theme:Theme) : appTheme{
     if (theme === "dark") return "dark"
     if (theme === "light") return "light"
     return "dark"

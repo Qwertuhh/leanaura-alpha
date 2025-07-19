@@ -1,3 +1,3 @@
-type appTheme = "light" | "dark" | "system";
+type appTheme = "light" | "dark" ;
 
 export type {appTheme};

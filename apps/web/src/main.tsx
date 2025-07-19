@@ -5,7 +5,6 @@ import './index.css'
 import App from './App.tsx'
 import Layout from './Layout.tsx'
 import Notebooks from '@/pages/notebooks/App.tsx'
-import ChatBox from "@/components/chat-box.tsx";
 import Notebook from "@/pages/notebook/App.tsx";
 
 createRoot(document.getElementById('root')!).render(
@@ -16,7 +15,6 @@ createRoot(document.getElementById('root')!).render(
                     <Route path="/" element={<App/>}/>
                     <Route path="/notebooks" element={<Notebooks/>}/>
                     <Route path="/notebook/:notebook_name" element={<Notebook/>}/>
-                    <Route path="/chat" element={<ChatBox/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -2,8 +2,8 @@ import { useNotebookStore } from "@/store";
 import { Excalidraw } from "@excalidraw/excalidraw";
 import type { OrderedExcalidrawElement } from "@excalidraw/excalidraw/element/types";
 import "@excalidraw/excalidraw/index.css";
-import {appTheme} from '@/Layout.tsx';
 import themeCasting from "@/lib/theme-casting";
+import { appTheme } from "@/components/theme-toggle";
 
 import type {
   AppState,
