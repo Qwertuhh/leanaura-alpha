@@ -6,9 +6,13 @@ import Layout from "@/Layout";
 import App from "@/App";
 import Notebook from "@/pages/notebook/App";
 import Notebooks from "@/pages/notebooks/App";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <QueryClientProvider client={queryClient}>
+
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -21,5 +25,6 @@ createRoot(document.getElementById("root")!).render(
         </Route>
       </Routes>
     </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>
 );

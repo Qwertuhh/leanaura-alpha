@@ -1,12 +1,31 @@
+import React, { useState } from "react";
+import { streamChatResponse } from "../api/chat";
 
-import ChatComponent from "@/components/chat.tsx";
+const ChatBox: React.FC = () => {
+  const [input, setInput] = useState("");
+  const [response, setResponse] = useState("");
 
-function ChatBox() {
-    return (
-        <div className="bg-white text-black fixed right-2 top-1/2 transform -translate-y-1/2" style={{ zIndex: 99 }}>
-            <ChatComponent />
-        </div>
-    );
-}
+  const handleSend = async () => {
+    setResponse(""); // Reset previous response
+    try {
+      await streamChatResponse(input, (chunk) => {
+        setResponse((prev) => prev + chunk);
+      });
+    } catch (error) {
+      console.error("Streaming error:", error);
+    }
+  };
+
+  return (
+    <div>
+      <textarea value={input} onChange={(e) => setInput(e.target.value)} />
+      <button onClick={handleSend}>Send</button>
+      <div>
+        <strong>Response:</strong>
+        <p>{response}</p>
+      </div>
+    </div>
+  );
+};
 
 export default ChatBox;
