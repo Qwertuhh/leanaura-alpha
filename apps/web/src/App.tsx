@@ -1,4 +1,3 @@
-import {ThemeProvider} from "@/components/theme-provider";
 import {useNotebookStore} from "@/store";
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
         notebookStore.deleteNotebook("Welcome to Toci Alpha");
     }
     return (
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      
             <div className="h-screen flex flex-col items-center justify-center">
                 <h1 className="text-6xl font-bold">Toci Alpha</h1>
                 <p className="text-2xl mt-4">A simple note taking app</p>
@@ -22,7 +21,6 @@ function App() {
                     Go to Notebooks
                 </button>
             </div>
-        </ThemeProvider>
     );
 }
 

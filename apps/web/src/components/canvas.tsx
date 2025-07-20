@@ -2,8 +2,6 @@ import { useNotebookStore } from "@/store";
 import { Excalidraw } from "@excalidraw/excalidraw";
 import type { OrderedExcalidrawElement } from "@excalidraw/excalidraw/element/types";
 import "@excalidraw/excalidraw/index.css";
-import themeCasting from "@/lib/theme-casting";
-import { appTheme } from "@/components/theme-toggle";
 
 import type {
   AppState,
@@ -89,7 +87,8 @@ function CanvasComponent({ notebookName }: CanvasComponentProps) {
     <div className="h-[100vh]">
       <Excalidraw
         initialData={canvasScene}
-        theme={themeCasting(appTheme)}
+        //! Dynamically set the theme based on the current theme
+        theme={"dark"}
         onChange={(excalidrawElements, appState, files) => {
           handleSceneChange(excalidrawElements, appState, files);
         }}
