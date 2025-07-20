@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { streamChatResponse } from "../api/chat";
-
+import Markdown from "react-markdown";
+import remarkGfm from 'remark-gfm';
 const ChatBox: React.FC = () => {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("");
@@ -22,7 +23,7 @@ const ChatBox: React.FC = () => {
       <button onClick={handleSend}>Send</button>
       <div>
         <strong>Response:</strong>
-        <p>{response}</p>
+        <Markdown remarkPlugins={[remarkGfm]}>{response}</Markdown>
       </div>
     </div>
   );
