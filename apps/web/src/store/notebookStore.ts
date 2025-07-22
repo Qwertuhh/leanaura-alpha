@@ -1,7 +1,7 @@
 import slugify from "@/lib/slug";
 import {create} from "zustand";
 import {devtools, persist} from "zustand/middleware";
-import type {Notebook, StoreState} from "@/types";
+import type { Notebook, StoreState } from "@/types";
 import type {SceneData} from "@excalidraw/excalidraw/types";
 
 /**
@@ -120,12 +120,8 @@ const notebookStore = (
     },
 });
 
-const useNotebookStore = create<StoreState>()(
-    devtools(
-        persist(notebookStore, {
-            name: "notebook-store",
-        })
-    )
-);
+const useNotebookStore = create<StoreState>()(devtools(persist(notebookStore, {
+    name: "notebook-storage",
+})));
 
 export default useNotebookStore;

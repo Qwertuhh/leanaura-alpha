@@ -1,7 +1,7 @@
 import CanvasComponent from "@/components/canvas.tsx";
 import { useNotebookStore } from "@/store";
 import { useParams } from "react-router-dom";
-import ChatBox from "@/components/chat-box.tsx";
+import ChatApp from "@/components/chat-box.tsx";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 function Notebook() {
@@ -24,12 +24,8 @@ function Notebook() {
       </Panel>
       <PanelResizeHandle className="w-[1px] bg-stone-600" />
       <Panel defaultSize={25}>
-        <ChatBox />
+        <ChatApp  />
       </Panel>
-      {/* <PanelResizeHandle />
-  <Panel defaultSize={25}>
-    <Console />
-  </Panel> */}
     </PanelGroup>
   );
 }
