@@ -25,10 +25,11 @@ function Notebook() {
                 <Panel>
                     <RichTextEditor/>
                 </Panel>
+                <PanelResizeHandle/>
                 <Panel>
                     <CanvasComponent notebookName={notebookName}/>
                 </Panel>
-                <PanelResizeHandle className="w-[1px] bg-stone-600"/>
+                <PanelResizeHandle />
                 <Panel defaultSize={25}>
                     <ChatApp/>
                 </Panel>
