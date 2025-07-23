@@ -20,15 +20,15 @@ function ChatInput  ({ onSend }: { onSend: (input: string) => void }) {
     };
 
     return (
-        <div className="flex-shrink-0 flex gap-2 p-4 border-t bg-background">
+        <div className="flex-shrink-0 flex gap-2 p-4 border-t bg-background justify-center items-center">
             <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me something..."
-                className="flex-1"
+                className="flex-1 resize-none h-10 outline-none"
             />
-            <Button onClick={handleSendClick} disabled={!input.trim()}>
+            <Button onClick={handleSendClick} disabled={!input.trim()} className="h-10">
                 Send
             </Button>
         </div>
