@@ -8,7 +8,8 @@ import {Table} from "@/components/ui/table.tsx";
 
 type codeProps = DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 const markdownComponents: Components = {
-    code({  className, children, ...props}) {
+
+    code({ className, children, ...props}) {
         const match = /language-(\w+)/.exec(className || "");
         return  match ? (
             <div className="overflow-x-auto">
@@ -22,7 +23,7 @@ const markdownComponents: Components = {
             </div>
         ) : (
 
-            <code className="bg-muted dark:bg-muted/50 px-1 py-0.5 rounded" {...props as codeProps}>
+            <code className={`${className} bg-stone-200 dark:bg-stone-700 px-1 py-0.5 rounded `} {...props as codeProps}>
                 {children}
             </code>
         );
