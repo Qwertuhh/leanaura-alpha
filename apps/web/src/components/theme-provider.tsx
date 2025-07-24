@@ -73,4 +73,5 @@ const useTheme = () => {
 };
 
 export {useTheme};
+export type {Theme}
 export default ThemeProvider;
