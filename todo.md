@@ -1,6 +1,7 @@
 # TODOs
 
 - [ ] rich text editor ui
+- [ ] button to toggle panels
 - [ ] header
 - [ ] chat-scroll fix (`skiable`)
 - [ ] rich text editor backend 
