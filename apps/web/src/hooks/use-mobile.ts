@@ -23,5 +23,5 @@ function useIsMobile({breakpoint}: UseIsMobileOptions = {breakpoint: MOBILE_BREA
     return !!isMobile
 }
 
-export default useIsMobile;
+export {useIsMobile};
 export {MOBILE_BREAKPOINT};

@@ -7,7 +7,7 @@ import {XIcon} from "lucide-react";
 import type {Message} from "@/types";
 import ChatInput from "@/components/chat-box/chat-input.tsx";
 import ChatHistory from "@/components/chat-box/chat-history.tsx";
-import useIsMobile from "@/hooks/use-mobile.ts";
+import {useIsMobile} from "@/hooks/use-mobile.ts";
 
 
 const ChatPanel = ({messages, onSend}: { messages: Message[]; onSend: (input: string) => void }) => (
