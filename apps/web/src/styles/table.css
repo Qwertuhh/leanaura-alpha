@@ -1,0 +1,53 @@
+.table-wrapper td code,
+.table-wrapper th code {
+  padding: 0.2rem 0.4rem;
+  margin: 0.2rem;
+  font-size: 0.8em;
+  white-space: nowrap;
+  background-color: var(--color-card);
+  border-radius: 0.2rem;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  margin-bottom: 0.6rem;
+  margin-top: 0.6rem;
+}
+td, th {
+  border: 1px solid var(--color-border);
+  color: var(--color-foreground);
+  padding: 0.5rem;
+  text-align: left;
+  font-size: 1em;
+}
+
+@media (min-width: 768px) {
+  .table-wrapper {
+    overflow: auto;
+  }
+
+  .table-wrapper table {
+    width: 100%;
+  }
+
+  .table-wrapper td,
+  .table-wrapper th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .table-wrapper td:first-child,
+  .table-wrapper th:first-child {
+    left: 0;
+  }
+
+  .table-wrapper tbody tr {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .table-wrapper td:first-child {
+    background-color: var(--color-background);
+  }
+}
