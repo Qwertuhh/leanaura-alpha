@@ -1,12 +1,20 @@
 # toci-alpha
-This a project build to provide all-time available resources and teacher to guide you in your learning path
+This is a project built to provide all-time available resources and teachers to guide you in your learning path
 
-> [!ALERT]
-> It's an alpha version
-> It's not ready for production
+> [!WARNING]
+> - It's an alpha version
+> - It's not ready for production
 
 # Contribute
-You are free to contribute in this project
-- *Contribute to this project in a beautiful manner*
+You are free to contribute to this project
+- *beautifully contribute to this project*
 - Add new features
 - Fix bugs
+
+## License
+
+This project is licensed under the Apache-2.0 license. See the [LICENSE](LICENSE) file for more details.
+
+## Warranty
+
+Please see the [WARRANTY.md](WARRANTY.md) file for information on warranties and limitations of liability.
