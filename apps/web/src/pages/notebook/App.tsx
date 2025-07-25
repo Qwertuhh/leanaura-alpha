@@ -18,18 +18,18 @@ function Notebook() {
         console.error("App name is required.");
         return <div className="p-4 text-red-500">Notebook name is required.</div>;
     }
-
+    const panelResizeHandleStyle = "w-[1px] bg-stone-200 dark:bg-stone-700";
     return (
         <TooltipProvider>
             <PanelGroup autoSaveId="example" direction="horizontal">
                 <Panel>
-                    <RichTextEditor/>
+                    <RichTextEditor notebookName={notebookName}/>
                 </Panel>
-                <PanelResizeHandle/>
+                <PanelResizeHandle className={panelResizeHandleStyle}/>
                 <Panel>
                     <CanvasComponent notebookName={notebookName}/>
                 </Panel>
-                <PanelResizeHandle />
+                <PanelResizeHandle className={panelResizeHandleStyle}/>
                 <Panel defaultSize={25}>
                     <ChatApp/>
                 </Panel>

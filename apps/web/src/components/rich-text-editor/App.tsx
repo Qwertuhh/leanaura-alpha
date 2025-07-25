@@ -1,22 +1,32 @@
-import { useEditor, EditorContent } from "@tiptap/react";
+import {useEditor, EditorContent} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useEffect, useState } from "react";
-import { Toolbar } from "@/components/rich-text-editor/toolbar";
+import {useEffect, useState, useMemo} from "react";
+import {Toolbar} from "@/components/rich-text-editor/toolbar";
+import {cn} from "@/lib/utils";
+import {useNotebookStore} from "@/store";
 
-function RichTextEditor() {
-    const [content, setContent] = useState("<p>Hello World!</p>");
+interface RichTextEditorProps {
+    notebookName: string
+}
 
+function RichTextEditor({notebookName}: RichTextEditorProps) {
+    const notebookStore = useNotebookStore();
+    const defaultValue = useMemo(() => notebookStore.getNotebookByName(notebookName)?.textContent, [notebookName, notebookStore]);
+    const [content, setContent] = useState(defaultValue || `<h1>${notebookName}</h1>`);
     const editor = useEditor({
         extensions: [StarterKit],
         content,
         editorProps: {
             attributes: {
-                class:
-                    "h-full w-[500rem] rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 prose dark:prose-invert",
+                class: cn(
+                    "h-full w-full min-w-[20rem] rounded-md bg-background px-3 py-2 text-sm placeholder:text-muted-foreground ring-offset-background",
+                    "focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 prose dark:prose-invert",
+                ),
             },
         },
-        onUpdate({ editor }) {
+        onUpdate({editor}) {
             setContent(editor.getHTML());
+            notebookStore.updateTextContentOfTheNotebook(editor.getHTML(), notebookName);
         },
     });
 
@@ -26,9 +36,11 @@ function RichTextEditor() {
     }, [content]);
 
     return (
-        <div className="flex flex-col justify-stretch space-y-2 h-full w-full p-2">
-            <Toolbar editor={editor} />
-            <EditorContent editor={editor} />
+        <div className="flex flex-col justify-stretch space-y-2 h-full w-full p-2 my-2">
+            <Toolbar editor={editor}/>
+            <div className="flex items-center justify-center">
+                <EditorContent editor={editor}/>
+            </div>
         </div>
     );
 }

@@ -51,6 +51,7 @@ const notebookStore = (
                 notebookName,
                 slug: slugify(notebookName),
                 canvasData: "[]",
+                textContent: "",
             };
             return {Notebooks: [...notebooks, newNotebook]};
         });
@@ -94,6 +95,9 @@ const notebookStore = (
         return get().Notebooks?.find((n) => n.notebookName === notebookName);
     },
 
+    getNotebookBySlug: (slug: string) => {
+        return get().Notebooks?.find((n) => n.slug === slug);
+    },
     /**
      * Retrieves a list of notebook names from the state.
      * If there are no notebooks available, it returns an empty array.
@@ -107,12 +111,24 @@ const notebookStore = (
      * @param scene The new canvas data
      * @param notebookName The name of the notebook to update
      */
-    updateCanvasOftheNotebook: (scene: SceneData, notebookName: string) => {
+    updateCanvasOfTheNotebook: (scene: SceneData, notebookName: string) => {
         set((state) => {
             const notebooks =
                 state.Notebooks?.map((n) =>
                     n.notebookName === notebookName
                         ? {...n, canvasData: JSON.stringify(scene)}
+                        : n
+                ) || [];
+            return {Notebooks: notebooks};
+        });
+    },
+
+    updateTextContentOfTheNotebook: (textContent: string, notebookName: string) => {
+        set((state) => {
+            const notebooks =
+                state.Notebooks?.map((n) =>
+                    n.notebookName === notebookName
+                        ? {...n, textContent}
                         : n
                 ) || [];
             return {Notebooks: notebooks};

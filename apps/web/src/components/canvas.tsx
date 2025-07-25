@@ -82,7 +82,7 @@ function CanvasComponent({ notebookName }: CanvasComponentProps) {
     const isSceneChanged =
       JSON.stringify(newScene) !== JSON.stringify(currentScene);
     if (isSceneChanged) {
-      notebookStore.updateCanvasOftheNotebook(newScene, notebookName);
+      notebookStore.updateCanvasOfTheNotebook(newScene, notebookName);
     }
   };
 

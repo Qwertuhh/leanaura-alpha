@@ -11,7 +11,7 @@ import {useIsMobile} from "@/hooks/use-mobile.ts";
 
 
 const ChatPanel = ({messages, onSend}: { messages: Message[]; onSend: (input: string) => void }) => (
-    <div className="flex flex-col h-full w-full bg-background border rounded-lg">
+    <div className="flex flex-col h-full w-full bg-background border">
         <ScrollArea className="m-2 flex-1">
             <ChatHistory messages={messages}/>
         </ScrollArea>
