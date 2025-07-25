@@ -43,19 +43,21 @@ function Notebooks() {
 
       {/* 📚 App List */}
       {notebooksName.length === 0 ? (
-        <div>No notebooks available.</div>
+        <div className="text-stone-600 dark:text-stone-300">
+          No notebooks available.
+        </div>
       ) : (
         <ul className="flex flex-col gap-2">
           {notebooksName.map((title, index) => {
             return (
               <li
                 key={index}
-                className="flex flex-col gap-2 rounded-md bg-white p-3 shadow"
+                className="flex flex-col gap-2 rounded-md bg-white dark:bg-stone-800 p-3 shadow dark:shadow-stone-700"
               >
                 <div className="flex items-center gap-3">
                   <Link
                     to={`/notebook/${title.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="text-lg font-semibold flex-1"
+                    className="text-lg font-semibold flex-1 text-stone-800 dark:text-white"
                   >
                     {title}
                   </Link>
@@ -74,7 +76,7 @@ function Notebooks() {
                     placeholder="Rename..."
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
-                    className="p-2 border rounded w-full"
+                    className="p-2 border rounded w-full text-stone-800 dark:text-white"
                   />
                   <button
                     onClick={() => {
@@ -83,7 +85,7 @@ function Notebooks() {
                         setNewName("");
                       }
                     }}
-                    className="bg-primary text-white px-3 py-1 rounded-md"
+                    className="bg-stone-800 dark:bg-stone-600 text-white px-3 py-1 rounded-md"
                   >
                     Rename
                   </button>
