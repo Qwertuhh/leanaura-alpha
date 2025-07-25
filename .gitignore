@@ -49,9 +49,6 @@ __pycache__/
 # Logs
 logs
 
-# cache
-*.turbo
-
 # TODO
 TODO.md
 todo.md
