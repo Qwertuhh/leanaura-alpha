@@ -14,13 +14,13 @@ interface StoreState {
   setNotebooks: (scene: string) => void;
   createNotebook: (notebookName: string) => void;
   deleteNotebook: (notebookName: string) => void;
-  renameNotebook: (oldName: string, newName: string) => void;
+  renameNotebook: (slug: string, newName: string) => void;
   getNotebookByName: (notebookName: string) => Notebook | undefined;
   getNotebookBySlug: (slug: string) => Notebook | undefined;
-  getListOfNotebooks: () => string[];
+  getListOfNotebooks: () => Notebook[];
 
   // Canvas
-  updateCanvasOfTheNotebook: (scene: SceneData, notebookName: string) => void;
+  updateCanvasOfTheNotebook: (scene: SceneData, slug: string) => void;
 
   // Text content
   updateTextContentOfTheNotebook: (textContent: string, notebookName: string) => void;

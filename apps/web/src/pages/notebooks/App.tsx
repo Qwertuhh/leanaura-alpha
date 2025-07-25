@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 
 function Notebooks() {
   const notebookStore = useNotebookStore();
-  const notebooksName = useMemo(
+  const notebooks = useMemo(
     () => notebookStore.getListOfNotebooks(),
     [notebookStore]
   );
@@ -42,27 +42,27 @@ function Notebooks() {
       </div>
 
       {/* 📚 App List */}
-      {notebooksName.length === 0 ? (
+      {notebooks.length === 0 ? (
         <div className="text-stone-600 dark:text-stone-300">
           No notebooks available.
         </div>
       ) : (
         <ul className="flex flex-col gap-2">
-          {notebooksName.map((title, index) => {
+          {notebooks.map((notebook) => {
             return (
               <li
-                key={index}
+                key={notebook.slug}
                 className="flex flex-col gap-2 rounded-md bg-white dark:bg-stone-800 p-3 shadow dark:shadow-stone-700"
               >
                 <div className="flex items-center gap-3">
                   <Link
-                    to={`/notebook/${title.toLowerCase().replace(/\s+/g, "-")}`}
+                    to={`/notebook/${notebook.slug}`}
                     className="text-lg font-semibold flex-1 text-stone-800 dark:text-white"
                   >
-                    {title}
+                    {notebook.notebookName}
                   </Link>
                   <button
-                    onClick={() => deleteNotebook(title)}
+                    onClick={() => deleteNotebook(notebook.slug)}
                     className="bg-destructive text-white px-3 py-1 rounded-md"
                   >
                     Delete
@@ -81,7 +81,7 @@ function Notebooks() {
                   <button
                     onClick={() => {
                       if (newName.trim()) {
-                        renameNotebook(title, newName.trim());
+                        renameNotebook(notebook.slug, newName.trim());
                         setNewName("");
                       }
                     }}

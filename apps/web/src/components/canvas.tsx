@@ -13,33 +13,33 @@ import type {
 import { useMemo } from "react";
 
 interface CanvasComponentProps {
-  notebookName: string;
+  notebookSlug: string;
 }
 
 /**
  * CanvasComponent is responsible for rendering the Excalidraw canvas
  * for a specific notebook. It retrieves the stored scene data for the
- * given notebook name from the store, ensures that the collaborators
+ * given notebook slug from the store, ensures that the collaborators
  * data is correctly formatted as a Map, and handles changes to the
  * canvas by updating the scene in the store.
  *
  * Props:
- * - notebookName: The name of the notebook whose canvas should be rendered.
+ * - notebookSlug: The slug of the notebook whose canvas should be rendered.
  *
  * The component uses the Excalidraw component to render the canvas and
  * listens for changes, updating the corresponding notebook's data in
  * the store if the scene changes.
  */
-function CanvasComponent({ notebookName }: CanvasComponentProps) {
+function CanvasComponent({ notebookSlug }: CanvasComponentProps) {
   const notebookStore = useNotebookStore();
   const { theme } = useTheme();
 
   const canvasScene: SceneData = useMemo(() => {
-    if (!notebookName) return null;
+    if (!notebookSlug) return null;
     return JSON.parse(
-      notebookStore.getNotebookByName?.(notebookName)?.canvasData ?? null!
+      notebookStore.getNotebookBySlug?.(notebookSlug)?.canvasData ?? null!
     );
-  }, [notebookStore, notebookName]);
+  }, [notebookStore, notebookSlug]);
 
   //* Ensure collaborators is a Map if it exists
   //* This is to handle cases where the data might be stored as an object
@@ -69,8 +69,8 @@ function CanvasComponent({ notebookName }: CanvasComponentProps) {
     appState: AppState,
     files: BinaryFiles
   ) => {
-    if (!notebookName) {
-      console.error("App name is required.");
+    if (!notebookSlug) {
+      console.error("App slug is required.");
       return;
     }
     const newScene = {
@@ -82,7 +82,7 @@ function CanvasComponent({ notebookName }: CanvasComponentProps) {
     const isSceneChanged =
       JSON.stringify(newScene) !== JSON.stringify(currentScene);
     if (isSceneChanged) {
-      notebookStore.updateCanvasOfTheNotebook(newScene, notebookName);
+      notebookStore.updateCanvasOfTheNotebook(newScene, notebookSlug);
     }
   };
 

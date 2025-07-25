@@ -58,27 +58,27 @@ const notebookStore = (
     },
 
     /**
-     * Delete a notebook by name.
-     * @param notebookName The name of the notebook to delete
+     * Delete a notebook by slug.
+     * @param slug The slug of the notebook to delete
      */
-    deleteNotebook: (notebookName: string) => {
+    deleteNotebook: (slug: string) => {
         set((state) => {
             const notebooks = state.Notebooks || [];
-            const filtered = notebooks.filter((n) => n.notebookName !== notebookName);
+            const filtered = notebooks.filter((n) => n.slug !== slug);
             return {Notebooks: filtered};
         });
     },
 
     /**
      * Rename a notebook.
-     * @param oldName The current name of the notebook to rename
+     * @param slug The current slug of the notebook to rename
      * @param newName The new name of the notebook
      */
-    renameNotebook: (oldName: string, newName: string) => {
+    renameNotebook: (slug: string, newName: string) => {
         set((state) => {
             const notebooks =
                 state.Notebooks?.map((n) =>
-                    n.notebookName === oldName
+                    n.slug === slug
                         ? {...n, notebookName: newName, slug: slugify(newName)}
                         : n
                 ) || [];
@@ -99,23 +99,23 @@ const notebookStore = (
         return get().Notebooks?.find((n) => n.slug === slug);
     },
     /**
-     * Retrieves a list of notebook names from the state.
+     * Retrieves a list of notebook objects from the state.
      * If there are no notebooks available, it returns an empty array.
      *
-     * @returns {string[]} An array of notebook names.
+     * @returns {Notebook[]} An array of notebook objects.
      */
-    getListOfNotebooks: () => (get().Notebooks || []).map((n) => n.notebookName),
+    getListOfNotebooks: () => get().Notebooks || [],
 
     /**
      * Update the canvas data for a given notebook
      * @param scene The new canvas data
-     * @param notebookName The name of the notebook to update
+     * @param slug The slug of the notebook to update
      */
-    updateCanvasOfTheNotebook: (scene: SceneData, notebookName: string) => {
+    updateCanvasOfTheNotebook: (scene: SceneData, slug: string) => {
         set((state) => {
             const notebooks =
                 state.Notebooks?.map((n) =>
-                    n.notebookName === notebookName
+                    n.slug === slug
                         ? {...n, canvasData: JSON.stringify(scene)}
                         : n
                 ) || [];
@@ -123,11 +123,11 @@ const notebookStore = (
         });
     },
 
-    updateTextContentOfTheNotebook: (textContent: string, notebookName: string) => {
+    updateTextContentOfTheNotebook: (textContent: string, slug: string) => {
         set((state) => {
             const notebooks =
                 state.Notebooks?.map((n) =>
-                    n.notebookName === notebookName
+                    n.slug === slug
                         ? {...n, textContent}
                         : n
                 ) || [];

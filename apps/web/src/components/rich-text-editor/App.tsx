@@ -4,15 +4,17 @@ import {useEffect, useState, useMemo} from "react";
 import {Toolbar} from "@/components/rich-text-editor/toolbar";
 import {cn} from "@/lib/utils";
 import {useNotebookStore} from "@/store";
+import {ScrollArea} from "@/components/ui/scroll-area.tsx";
 
 interface RichTextEditorProps {
-    notebookName: string
+    notebookSlug: string
 }
 
-function RichTextEditor({notebookName}: RichTextEditorProps) {
+function RichTextEditor({notebookSlug}: RichTextEditorProps) {
     const notebookStore = useNotebookStore();
-    const defaultValue = useMemo(() => notebookStore.getNotebookByName(notebookName)?.textContent, [notebookName, notebookStore]);
-    const [content, setContent] = useState(defaultValue || `<h1>${notebookName}</h1>`);
+    const notebook = useMemo(() => notebookStore.getNotebookBySlug(notebookSlug), [notebookSlug, notebookStore]);
+    const defaultValue = useMemo(() => notebook?.textContent, [notebook]);
+    const [content, setContent] = useState(defaultValue || `<h1>${notebook?.notebookName}</h1>`);
     const editor = useEditor({
         extensions: [StarterKit],
         content,
@@ -26,7 +28,7 @@ function RichTextEditor({notebookName}: RichTextEditorProps) {
         },
         onUpdate({editor}) {
             setContent(editor.getHTML());
-            notebookStore.updateTextContentOfTheNotebook(editor.getHTML(), notebookName);
+            notebookStore.updateTextContentOfTheNotebook(editor.getHTML(), notebookSlug);
         },
     });
 
@@ -38,9 +40,11 @@ function RichTextEditor({notebookName}: RichTextEditorProps) {
     return (
         <div className="flex flex-col justify-stretch space-y-2 h-full w-full p-2 my-2">
             <Toolbar editor={editor}/>
-            <div className="flex items-center justify-center">
-                <EditorContent editor={editor}/>
-            </div>
+            <ScrollArea className="w-full h-full">
+                <div className="flex items-center justify-center overflow-y-auto">
+                    <EditorContent editor={editor}/>
+                </div>
+            </ScrollArea>
         </div>
     );
 }

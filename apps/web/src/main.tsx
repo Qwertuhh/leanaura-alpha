@@ -20,7 +20,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/" element={<App />}></Route>
           <Route path="/notebooks" element={<Notebooks />}></Route>
           <Route
-            path="/notebook/:notebook_name"
+            path="/notebook/:notebook_slug"
             element={<Notebook />}
           ></Route>
         </Route>
