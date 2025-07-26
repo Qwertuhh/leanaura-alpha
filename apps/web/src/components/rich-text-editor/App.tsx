@@ -1,6 +1,6 @@
 import {useEditor, EditorContent} from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import {useEffect, useState, useMemo} from "react";
+import {useState, useMemo} from "react";
 import {Toolbar} from "@/components/rich-text-editor/toolbar";
 import {cn} from "@/lib/utils";
 import {useNotebookStore} from "@/store";
@@ -32,11 +32,6 @@ function RichTextEditor({notebookSlug, maximizePanel}: RichTextEditorProps) {
             notebookStore.updateTextContentOfTheNotebook(editor.getHTML(), notebookSlug);
         },
     });
-
-    // optional: log updated content
-    useEffect(() => {
-        console.log("Current content:", content);
-    }, [content]);
 
     return (
         <div className="flex flex-col justify-stretch space-y-2 h-full w-full p-2 my-2">
