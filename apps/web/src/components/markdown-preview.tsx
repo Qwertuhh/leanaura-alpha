@@ -1,46 +1,53 @@
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import type {CSSProperties, DetailedHTMLProps} from "react";
-import type {Components} from "react-markdown";
-import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
-import {oneDark} from "react-syntax-highlighter/dist/esm/styles/prism";
-import {Table} from "@/components/ui/table.tsx";
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import rehypeRaw from 'rehype-raw'
+import 'katex/dist/katex.min.css'
+import mermaid from 'mermaid'
 
-type codeProps = DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-const markdownComponents: Components = {
+const MermaidRenderer = (props: any) => {
+    const isMermaid = props.className?.includes('language-mermaid')
+    const code = props.node?.children?.[0]?.value || ''
+    const id = `mermaid-${Math.random().toString(36).slice(2)}`
+    const ref = React.useRef<HTMLDivElement>(null)
 
-    code({ className, children, ...props}) {
-        const match = /language-(\w+)/.exec(className || "");
-        return  match ? (
-            <div className="overflow-x-auto">
-                <SyntaxHighlighter
-                    style={oneDark as unknown as { [key: string]: CSSProperties }}
-                    language={match[1]}
-                    PreTag="div"
-                >
-                    {String(children).replace(/\n$/, "")}
-                </SyntaxHighlighter>
-            </div>
-        ) : (
+    React.useEffect(() => {
+        if (isMermaid && ref.current) {
+            mermaid.render(id, code).then(({ svg }) => {
+                ref.current!.innerHTML = svg
+            })
+        }
+    }, [code, isMermaid, id])
 
-            <code className={`${className} bg-stone-200 dark:bg-stone-700 px-1 py-0.5 rounded `} {...props as codeProps}>
-                {children}
-            </code>
-        );
-    },
-    table({children}) {
-        return (
-            <div className="overflow-x-auto">
-                <Table className="table-auto border-collapse">{children}</Table>
-            </div>
-        );
-    },
-};
-
-function MarkdownPreview({content}: { content: string }) {
-    return (<Markdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
-        {content}
-    </Markdown>)
+    return isMermaid ? <div ref={ref} /> : <code>{code}</code>
 }
 
-export default MarkdownPreview
+// Transform [[Note]] and ![[note.png]] to Markdown
+const preprocessMarkdown = (md: string) =>
+    md
+        .replace(/\[\[([^\]]+)\]\]/g, '[$1](./$1.md)')
+        .replace(/!\[\[([^\]]+)\]\]/g, '![$1](./$1)')
+
+const MarkdownRenderer = ({ content }: { content: string }) => {
+    return (
+        <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex, rehypeRaw]}
+            components={{
+                code(props) {
+                    const { className, children } = props
+                    if (className?.includes('language-mermaid')) {
+                        return <MermaidRenderer>{children}</MermaidRenderer>
+                    }
+                    return <code className={className}>{children}</code>
+                },
+            }}
+        >
+            {preprocessMarkdown(content)}
+        </ReactMarkdown>
+    )
+}
+
+export default MarkdownRenderer

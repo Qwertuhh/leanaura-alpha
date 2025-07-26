@@ -86,7 +86,7 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
     };
 
     return (
-        <div className="h-[calc(100vh-var(--header-height))]">
+        <div className="h-[var(--component-height)]">
             <Excalidraw
                 initialData={canvasScene}
                 theme={themeCasting(theme)}

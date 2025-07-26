@@ -69,7 +69,7 @@ const ChatApp: React.FC = () => {
                     </Button>
                 </div>
                 {isChatOpen && (
-                    <div className="fixed inset-0 z-50 bg-background">
+                    <div className="fixed inset-0 z-50 bg-background  w-[var(--component-height)]">
                         <div className="relative h-full w-full">
                             <ChatPanel messages={messages} onSend={handleSend}/>
                             <Button

@@ -34,7 +34,7 @@ function RichTextEditor({notebookSlug, maximizePanel}: RichTextEditorProps) {
     });
 
     return (
-        <div className="flex flex-col justify-stretch space-y-2 h-full w-full p-2 my-2">
+        <div className="flex flex-col justify-stretch space-y-2 h-full w-[var(--component-height)] p-2 my-2">
             <Toolbar editor={editor}/>
             <ScrollArea className="w-full h-full">
                 <div className={cn("flex items-center justify-center overflow-y-auto", maximizePanel && "justify-start")}>
