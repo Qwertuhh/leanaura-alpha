@@ -1,53 +1,75 @@
-import React from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
-import rehypeRaw from 'rehype-raw'
-import 'katex/dist/katex.min.css'
-import mermaid from 'mermaid'
+import React, {type DetailedHTMLProps, type HTMLAttributes, useEffect, useRef} from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
+import mermaid from 'mermaid';
+import 'katex/dist/katex.min.css';
 
-const MermaidRenderer = (props: any) => {
-    const isMermaid = props.className?.includes('language-mermaid')
-    const code = props.node?.children?.[0]?.value || ''
-    const id = `mermaid-${Math.random().toString(36).slice(2)}`
-    const ref = React.useRef<HTMLDivElement>(null)
+type codePropsType = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>;
+mermaid.initialize({ startOnLoad: false, theme: 'default' });
 
-    React.useEffect(() => {
-        if (isMermaid && ref.current) {
-            mermaid.render(id, code).then(({ svg }) => {
-                ref.current!.innerHTML = svg
-            })
-        }
-    }, [code, isMermaid, id])
-
-    return isMermaid ? <div ref={ref} /> : <code>{code}</code>
+interface MermaidRendererProps {
+  code: string;
 }
+
+const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const idRef = useRef(`mermaid-${Math.random().toString(36).slice(2)}`);
+
+  useEffect(() => {
+    if (ref.current && code) {
+      // Remove data-processed to allow re-rendering
+      ref.current.removeAttribute('data-processed');
+      mermaid
+        .render(idRef.current, code)
+        .then(({ svg }) => {
+          if (ref.current) {
+            ref.current.innerHTML = svg;
+          }
+        })
+        .catch((err) => {
+          console.error('Mermaid rendering failed:', err);
+        });
+    }
+  }, [code]);
+
+  return <div ref={ref} />;
+};
 
 // Transform [[Note]] and ![[note.png]] to Markdown
-const preprocessMarkdown = (md: string) =>
-    md
-        .replace(/\[\[([^\]]+)\]\]/g, '[$1](./$1.md)')
-        .replace(/!\[\[([^\]]+)\]\]/g, '![$1](./$1)')
+const preprocessMarkdown = (md: string): string =>
+  md
+    .replace(/\[\[([^\]]+)\]\]/g, '[$1](./$1.md)')
+    .replace(/!\[\[([^\]]+)\]\]/g, '![$1](./$1)');
 
-const MarkdownRenderer = ({ content }: { content: string }) => {
-    return (
-        <ReactMarkdown
-            remarkPlugins={[remarkGfm, remarkMath]}
-            rehypePlugins={[rehypeKatex, rehypeRaw]}
-            components={{
-                code(props) {
-                    const { className, children } = props
-                    if (className?.includes('language-mermaid')) {
-                        return <MermaidRenderer>{children}</MermaidRenderer>
-                    }
-                    return <code className={className}>{children}</code>
-                },
-            }}
-        >
-            {preprocessMarkdown(content)}
-        </ReactMarkdown>
-    )
+interface MarkdownRendererProps {
+  content: string;
 }
 
-export default MarkdownRenderer
+const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm, remarkMath]}
+      rehypePlugins={[rehypeKatex, rehypeRaw]}
+      components={{
+        code({ className, children, ...props }) {
+          const match = /language-(\w+)/.exec(className || '');
+          if (match && match[1] === 'mermaid') {
+            return <MermaidRenderer code={String(children).replace(/\n$/, '')} />;
+          }
+          return (
+            <code className={className} {...props as codePropsType}>
+              {children}
+            </code>
+          );
+        },
+      }}
+    >
+      {preprocessMarkdown(content)}
+    </ReactMarkdown>
+  );
+};
+
+export default MarkdownRenderer;
