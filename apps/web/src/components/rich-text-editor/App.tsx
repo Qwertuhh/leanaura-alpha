@@ -8,9 +8,10 @@ import {ScrollArea} from "@/components/ui/scroll-area.tsx";
 
 interface RichTextEditorProps {
     notebookSlug: string
+    maximizePanel: boolean
 }
 
-function RichTextEditor({notebookSlug}: RichTextEditorProps) {
+function RichTextEditor({notebookSlug, maximizePanel}: RichTextEditorProps) {
     const notebookStore = useNotebookStore();
     const notebook = useMemo(() => notebookStore.getNotebookBySlug(notebookSlug), [notebookSlug, notebookStore]);
     const defaultValue = useMemo(() => notebook?.textContent, [notebook]);
@@ -41,7 +42,7 @@ function RichTextEditor({notebookSlug}: RichTextEditorProps) {
         <div className="flex flex-col justify-stretch space-y-2 h-full w-full p-2 my-2">
             <Toolbar editor={editor}/>
             <ScrollArea className="w-full h-full">
-                <div className="flex items-center justify-center overflow-y-auto">
+                <div className={cn("flex items-center justify-center overflow-y-auto", maximizePanel && "justify-start")}>
                     <EditorContent editor={editor}/>
                 </div>
             </ScrollArea>

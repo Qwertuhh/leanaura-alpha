@@ -5,13 +5,14 @@ import ChatApp from "@/components/chat-box/App.tsx";
 import {Panel, PanelGroup, PanelResizeHandle, type ImperativePanelGroupHandle} from "react-resizable-panels";
 import {TooltipProvider} from "@/components/ui/tooltip"
 import RichTextEditor from "@/components/rich-text-editor/App.tsx";
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {PanelButton} from "@/components/panel-button.tsx";
-import {BookText, PenSquare, MessageSquare, Columns} from "lucide-react";
+import {BookText, PenSquare, MessageSquare} from "lucide-react";
 
 function Notebook() {
     const {notebook_slug: notebookSlug} = useParams();
     const panelGroupRef = useRef<ImperativePanelGroupHandle>(null);
+    const [layout, setLayout] = useState([33, 34, 33]);
 
     const hasHydrated = useNotebookStore.persist.hasHydrated();
     if (!hasHydrated) {
@@ -24,17 +25,24 @@ function Notebook() {
     }
 
     const togglePanel = (panelIndex: number) => {
-        const layout = panelGroupRef.current?.getLayout();
-        if (layout) {
-            const newLayout = layout.map((size, index) => {
-                if (index === panelIndex) {
-                    return size > 0 ? 0 : 33;
-                }
-                return size > 0 ? size : 33;
-            });
-            const activePanels = newLayout.filter(size => size > 0).length;
-            const newSize = 100 / activePanels;
-            panelGroupRef.current?.setLayout(newLayout.map(size => size > 0 ? newSize : 0));
+        const currentLayout = panelGroupRef.current?.getLayout();
+        if (!currentLayout) return;
+
+        const newLayout = [...currentLayout];
+
+        // Toggle the selected panel's size
+        newLayout[panelIndex] = newLayout[panelIndex] > 0 ? 0 : 33; // Use a non-zero placeholder
+
+        const activePanels = newLayout.filter(size => size > 0);
+        const activePanelCount = activePanels.length;
+
+        if (activePanelCount === 0) {
+            // If all panels are closed, show the canvas
+            newLayout[1] = 100;
+            panelGroupRef.current?.setLayout(newLayout);
+        } else {
+            const newSize = 100 / activePanelCount;
+            panelGroupRef.current?.setLayout(newLayout.map(size => (size > 0 ? newSize : 0)));
         }
     };
 
@@ -42,17 +50,14 @@ function Notebook() {
         panelGroupRef.current?.setLayout([0, 0, 0].map((_, index) => index === panelIndex ? 100 : 0));
     };
 
-    const resetLayout = () => {
-        panelGroupRef.current?.setLayout([33.3, 33.3, 33.3]);
-    }
 
     const panelResizeHandleStyle = "w-[1px] bg-stone-200 dark:bg-stone-700";
     return (
         <TooltipProvider>
             <div className="relative h-screen w-screen">
-                <PanelGroup ref={panelGroupRef} autoSaveId="example" direction="horizontal">
+                <PanelGroup ref={panelGroupRef} autoSaveId="example" direction="horizontal" onLayout={setLayout}>
                     <Panel id="editor">
-                        <RichTextEditor notebookSlug={notebookSlug}/>
+                        <RichTextEditor notebookSlug={notebookSlug} maximizePanel={layout[0] !== 100}/> // to get if the panel is maximized or not
                     </Panel>
                     <PanelResizeHandle className={panelResizeHandleStyle}/>
                     <Panel id="canvas">
@@ -67,7 +72,6 @@ function Notebook() {
                     <PanelButton tooltip="Toggle Editor" size="icon" variant="outline" onClick={() => togglePanel(0)} onDoubleClick={() => maximizePanel(0)}><BookText/></PanelButton>
                     <PanelButton tooltip="Toggle Canvas" size="icon" variant="outline" onClick={() => togglePanel(1)} onDoubleClick={() => maximizePanel(1)}><PenSquare/></PanelButton>
                     <PanelButton tooltip="Toggle Chat" size="icon" variant="outline" onClick={() => togglePanel(2)} onDoubleClick={() => maximizePanel(2)}><MessageSquare/></PanelButton>
-                    <PanelButton tooltip="Reset Layout" size="icon" variant="outline" onClick={resetLayout}><Columns/></PanelButton>
                 </div>
             </div>
         </TooltipProvider>
