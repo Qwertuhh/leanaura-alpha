@@ -2,7 +2,7 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 from typing import Generator
-
+from const.ai_prompts import  ai_stream_chat_prompt
 
 load_dotenv()
 
@@ -27,7 +27,7 @@ def stream_chat_response(prompt: str) -> Generator[str, None, None]:
     response = client.chat.completions.create(
         model="gemini-2.0-flash",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": ai_stream_chat_prompt},
             {"role": "user", "content": prompt}
         ],
         stream=True

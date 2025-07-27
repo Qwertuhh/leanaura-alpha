@@ -8,6 +8,7 @@ import type {Message} from "@/types";
 import ChatInput from "@/components/chat-box/chat-input.tsx";
 import ChatHistory from "@/components/chat-box/chat-history.tsx";
 import {useIsMobile} from "@/hooks/use-mobile.ts";
+import defaultHistory from "@/assets/default_chat_history.txt";
 
 
 const ChatPanel = ({messages, onSend}: { messages: Message[]; onSend: (input: string) => void }) => (
@@ -24,7 +25,7 @@ const ChatApp: React.FC = () => {
     const [isChatOpen, setChatOpen] = useState(false);
     const isMobile = useIsMobile();
 
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[]>([{role: "assistant", content: defaultHistory}]);
 
     const handleSend = async (input: string) => {
         const newUserMessage: Message = {role: "user", content: input};

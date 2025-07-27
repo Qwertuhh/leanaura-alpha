@@ -1,6 +1,7 @@
 import type {Message} from "@/types";
 import {useEffect, useRef} from "react";
 import MarkdownPreview from "@/components/markdown-preview.tsx";
+import {ScrollArea} from "@/components/ui/scroll-area.tsx";
 
 interface ChatHistoryProps {
   messages: Message[];
@@ -26,6 +27,7 @@ function ChatHistory({ messages }: ChatHistoryProps) {
     }, [messages]);
 
     return (
+        <ScrollArea>
             <div className="space-y-4 pr-4">
                 {messages.map((msg, idx) => (
                     <div
@@ -41,6 +43,7 @@ function ChatHistory({ messages }: ChatHistoryProps) {
                 ))}
                 <div ref={messagesEndRef} />
             </div>
+        </ScrollArea>
     );
 }
 export default ChatHistory;
