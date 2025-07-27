@@ -46,12 +46,10 @@ Now respond as that AI teacher and complete the task.
 
 Output Style Example:
 It's just a simple example of a output expectation from you.
-
 ## 🌟 Diagram + Math Showcase
 
 ### 🧠 Logic Flow
 mermaid diagram example
-
 ```mermaid
 graph TD
   X[Input x] --> Y{Is x > 5?}

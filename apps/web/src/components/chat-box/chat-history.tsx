@@ -1,7 +1,8 @@
 import type {Message} from "@/types";
-import {useEffect, useRef} from "react";
+import {useEffect, useMemo, useRef} from "react";
 import MarkdownPreview from "@/components/markdown-preview.tsx";
 import {ScrollArea} from "@/components/ui/scroll-area.tsx";
+import defaultHistory from "@/const/defaultHistory";
 
 interface ChatHistoryProps {
   messages: Message[];
@@ -22,17 +23,23 @@ interface ChatHistoryProps {
 function ChatHistory({ messages }: ChatHistoryProps) {
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-    useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const messageCompleteHistory = useMemo(() => {
+        return  messages.length > 0 ? messages : [{role: "assistant", content: defaultHistory}];
     }, [messages]);
+
+    useEffect(() => {
+        setTimeout(() => {
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 0);
+    }, [messageCompleteHistory]);
 
     return (
         <ScrollArea>
             <div className="space-y-4 pr-4">
-                {messages.map((msg, idx) => (
+                {messageCompleteHistory.map((msg, idx) => (
                     <div
                         key={idx}
-                        className={`p-3 rounded-md max-w-full break-words ${
+                        className={`message p-3 rounded-md max-w-full break-words ${
                             msg.role === "user"
                                 ? "bg-blue-50 dark:bg-stone-900"
                                 : "bg-gray-100 dark:bg-stone-800"

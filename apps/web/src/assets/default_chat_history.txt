@@ -2,7 +2,6 @@
 
 ### 🧠 Logic Flow
 mermaid diagram example
-
 ```mermaid
 graph TD
   X[Input x] --> Y{Is x > 5?}
