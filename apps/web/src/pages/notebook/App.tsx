@@ -35,7 +35,7 @@ function Notebook() {
             <div className="relative h-screen w-screen flex flex-col">
                 <NotebookHeader panelGroupRef={panelGroupRef} maximizePanel={maximizePanel}/>
                 <PanelGroup ref={panelGroupRef} autoSaveId="example" direction="horizontal" onLayout={setLayout}>
-                    <Panel id="editor">
+                    <Panel id="editor" className="min-w-[20rem] max-w-[30rem]">
                         <RichTextEditor notebookSlug={notebookSlug} maximizePanel={layout[0] !== 100}/> // to get if the panel is maximized or not
                     </Panel>
                     <PanelResizeHandle className={panelResizeHandleStyle}/>
