@@ -2,7 +2,7 @@ const defaultHistory = `
 ## 🌟 Welcome to \`toci\`, The AI Teacher
 \`\`\`mermaid
 graph TD
-  X[Supports x] 
+  X[toci] 
   Y[Mermaid]
   Z[Latex]
   X -- supports -->Y

@@ -1,7 +1,6 @@
 import CanvasComponent from "@/components/canvas.tsx";
 import {useNotebookStore} from "@/store";
 import {useParams} from "react-router-dom";
-import ChatApp from "@/components/chat-box/App.tsx";
 import {Panel, PanelGroup, PanelResizeHandle, type ImperativePanelGroupHandle} from "react-resizable-panels";
 import {TooltipProvider} from "@/components/ui/tooltip"
 import RichTextEditor from "@/components/rich-text-editor/App.tsx";
@@ -35,16 +34,12 @@ function Notebook() {
             <div className="relative h-screen w-screen flex flex-col">
                 <NotebookHeader panelGroupRef={panelGroupRef} maximizePanel={maximizePanel}/>
                 <PanelGroup ref={panelGroupRef} autoSaveId="example" direction="horizontal" onLayout={setLayout}>
-                    <Panel id="editor" className="min-w-[20rem] max-w-[30rem]">
+                    <Panel id="editor">
                         <RichTextEditor notebookSlug={notebookSlug} maximizePanel={layout[0] !== 100}/> // to get if the panel is maximized or not
                     </Panel>
                     <PanelResizeHandle className={panelResizeHandleStyle}/>
                     <Panel id="canvas">
                         <CanvasComponent notebookSlug={notebookSlug}/>
-                    </Panel>
-                    <PanelResizeHandle className={panelResizeHandleStyle}/>
-                    <Panel id="chat" defaultSize={25}>
-                        <ChatApp/>
                     </Panel>
                 </PanelGroup>
             </div>
