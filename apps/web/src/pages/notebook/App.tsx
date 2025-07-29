@@ -16,6 +16,10 @@ function Notebook() {
     const [showCanvas, setShowCanvas] = useState(true);
     const [showPlayground, setShowPlayground] = useState(true);
     const [isPlaygroundMaximized, setIsPlaygroundMaximized] = useState(false);
+    const [isEditorMaximized, setIsEditorMaximized] = useState(false);
+    useEffect(() => {
+        setIsEditorMaximized(showEditor && !showCanvas && !showPlayground);
+    }, [showEditor, showCanvas, showPlayground]);
 
     const hasHydrated = useNotebookStore.persist.hasHydrated();
 
@@ -58,7 +62,7 @@ function Notebook() {
                 ) : (
                     <PanelGroup ref={horizontalPanelGroupRef} autoSaveId="main-layout" direction="horizontal">
                         {showEditor && (
-                            <Panel id="editor" minSize={10} className="min-w-[20rem] max-w-[30rem]">
+                            <Panel id="editor" minSize={10} className={!isEditorMaximized ? "min-w-[20rem] max-w-[30rem]" : ""}>
                                 <RichTextEditor notebookSlug={notebookSlug} maximizePanel={false}/>
                             </Panel>
                         )}
