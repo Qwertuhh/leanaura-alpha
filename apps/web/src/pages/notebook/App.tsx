@@ -6,11 +6,16 @@ import {TooltipProvider} from "@/components/ui/tooltip"
 import RichTextEditor from "@/components/rich-text-editor/App.tsx";
 import {useRef, useState} from "react";
 import NotebookHeader from "@/components/notebook-header/App.tsx";
+import { Playground } from "@/components/playground/App.tsx";
 
 function Notebook() {
     const {notebook_slug: notebookSlug} = useParams();
-    const panelGroupRef = useRef<ImperativePanelGroupHandle>(null);
-    const [layout, setLayout] = useState([33, 34, 33]);
+    const horizontalPanelGroupRef = useRef<ImperativePanelGroupHandle>(null);
+
+    const [showEditor, setShowEditor] = useState(true);
+    const [showCanvas, setShowCanvas] = useState(true);
+    const [showPlayground, setShowPlayground] = useState(true);
+    const [isPlaygroundMaximized, setIsPlaygroundMaximized] = useState(false);
 
     const hasHydrated = useNotebookStore.persist.hasHydrated();
     if (!hasHydrated) {
@@ -22,26 +27,48 @@ function Notebook() {
         return <div className="p-4 text-red-500">Notebook slug is required.</div>;
     }
 
-
-    const maximizePanel = (panelIndex: number) => {
-        panelGroupRef.current?.setLayout([0, 0, 0].map((_, index) => index === panelIndex ? 100 : 0));
+    const togglePlaygroundMaximization = () => {
+        setIsPlaygroundMaximized(!isPlaygroundMaximized);
     };
 
+    const panelResizeHandleStyle = "w-[1px] bg-stone-200 dark:bg-stone-700 hover:w-2 hover:bg-blue-500 transition-all";
 
-    const panelResizeHandleStyle = "w-[1px] bg-stone-200 dark:bg-stone-700";
     return (
         <TooltipProvider>
             <div className="relative h-screen w-screen flex flex-col">
-                <NotebookHeader panelGroupRef={panelGroupRef} maximizePanel={maximizePanel}/>
-                <PanelGroup ref={panelGroupRef} autoSaveId="example" direction="horizontal" onLayout={setLayout}>
-                    <Panel id="editor">
-                        <RichTextEditor notebookSlug={notebookSlug} maximizePanel={layout[0] !== 100}/> // to get if the panel is maximized or not
-                    </Panel>
-                    <PanelResizeHandle className={panelResizeHandleStyle}/>
-                    <Panel id="canvas">
-                        <CanvasComponent notebookSlug={notebookSlug}/>
-                    </Panel>
-                </PanelGroup>
+                <NotebookHeader
+                    showEditor={showEditor}
+                    setShowEditor={setShowEditor}
+                    showCanvas={showCanvas}
+                    setShowCanvas={setShowCanvas}
+                    showPlayground={showPlayground}
+                    setShowPlayground={setShowPlayground}
+                />
+                {isPlaygroundMaximized ? (
+                    <div className="flex-grow p-4">
+                        <Playground toggleMaximization={togglePlaygroundMaximization} isMaximized={isPlaygroundMaximized} />
+                    </div>
+                ) : (
+                    <PanelGroup ref={horizontalPanelGroupRef} autoSaveId="main-layout" direction="horizontal">
+                        {showEditor && (
+                            <Panel id="editor" minSize={10} className="min-w-[20rem] max-w-[30rem]">
+                                <RichTextEditor notebookSlug={notebookSlug} maximizePanel={false}/>
+                            </Panel>
+                        )}
+                        {showEditor && (showCanvas || showPlayground) && <PanelResizeHandle className={panelResizeHandleStyle}/>}
+                        {showCanvas && (
+                            <Panel id="canvas" minSize={10}>
+                                <CanvasComponent notebookSlug={notebookSlug}/>
+                            </Panel>
+                        )}
+                        {showCanvas && showPlayground && <PanelResizeHandle className={panelResizeHandleStyle} />}
+                        {showPlayground && (
+                            <Panel id="playground" minSize={10}>
+                                <Playground toggleMaximization={togglePlaygroundMaximization} isMaximized={isPlaygroundMaximized} />
+                            </Panel>
+                        )}
+                    </PanelGroup>
+                )}
             </div>
         </TooltipProvider>
     );
