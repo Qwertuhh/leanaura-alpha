@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {Panel, PanelGroup, PanelResizeHandle, type ImperativePanelGroupHandle} from "react-resizable-panels";
 import {TooltipProvider} from "@/components/ui/tooltip"
 import RichTextEditor from "@/components/rich-text-editor/App.tsx";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import NotebookHeader from "@/components/notebook-header/App.tsx";
 import { Playground } from "@/components/playground/App.tsx";
 
@@ -18,6 +18,13 @@ function Notebook() {
     const [isPlaygroundMaximized, setIsPlaygroundMaximized] = useState(false);
 
     const hasHydrated = useNotebookStore.persist.hasHydrated();
+
+    useEffect(() => {
+        if (!showEditor && !showCanvas && !showPlayground) {
+            setShowCanvas(true);
+        }
+    }, [showEditor, showCanvas, showPlayground]);
+
     if (!hasHydrated) {
         return <div className="p-4">Loading notebook...</div>;
     }
