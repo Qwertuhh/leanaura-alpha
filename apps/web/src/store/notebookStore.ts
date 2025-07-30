@@ -98,6 +98,11 @@ const notebookStore = (
     getNotebookBySlug: (slug: string) => {
         return get().Notebooks?.find((n) => n.slug === slug);
     },
+
+    getNotebookNameBySlug: (slug: string) => {
+        const notebook = get().Notebooks?.find((n) => n.slug === slug);
+        return notebook ? notebook.notebookName : undefined;
+    },
     /**
      * Retrieves a list of notebook objects from the state.
      * If there are no notebooks available, it returns an empty array.

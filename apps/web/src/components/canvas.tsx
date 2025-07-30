@@ -4,14 +4,14 @@ import type {OrderedExcalidrawElement} from "@excalidraw/excalidraw/element/type
 import "@excalidraw/excalidraw/index.css";
 import {useTheme} from "@/components/theme-provider";
 import themeCasting from "@/lib/theme-casting";
+import {useLocation} from "react-router-dom";
 
 import type {
     AppState,
     BinaryFiles,
     SceneData,
 } from "@excalidraw/excalidraw/types";
-import {useMemo} from "react";
-
+import {useEffect, useMemo,  useState} from "react";
 interface CanvasComponentProps {
     notebookSlug: string;
 }
@@ -30,10 +30,41 @@ interface CanvasComponentProps {
  * listens for changes, updating the corresponding notebook's data in
  * the store if the scene changes.
  */
+
+async function downloadFile(addLibraryDownloadUrl: string) {
+    try {
+        const response = await fetch(addLibraryDownloadUrl!);
+        if (!response.ok) console.error("Failed to fetch library");
+        const blob = await response.blob();
+        console.log("Blob downloaded:", blob);
+        return blob;
+    } catch (e) {
+        console.error(e);
+    }
+}
 function CanvasComponent({notebookSlug}: CanvasComponentProps) {
     const notebookStore = useNotebookStore();
     const {theme} = useTheme();
+    const { hash } = useLocation();
+    const [addLibraryDownloadUrl, setAddLibraryUrl] = useState<string | null>(null);
+    useEffect(() => {
+        if (!hash) return;
 
+        // 1. Remove leading '#'
+        const raw = hash.slice(1);
+
+        // 2. Build URLSearchParams
+        const params = new URLSearchParams(raw);
+
+        // 3. Get and decode the addLibrary param
+        const encoded = params.get('addLibrary');
+        if (encoded) {
+            setAddLibraryUrl(decodeURIComponent(encoded ?? ""));
+        }
+        console.log(addLibraryDownloadUrl);
+        downloadFile(addLibraryDownloadUrl!);
+
+    }, [hash, addLibraryDownloadUrl]);
     const canvasScene: SceneData = useMemo(() => {
         if (!notebookSlug) return null;
         return JSON.parse(
@@ -84,6 +115,8 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
             notebookStore.updateCanvasOfTheNotebook(newScene, notebookSlug);
         }
     };
+
+
 
     return (
         <div className="h-[var(--component-height)]">

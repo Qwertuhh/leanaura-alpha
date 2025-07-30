@@ -18,7 +18,7 @@ interface StoreState {
   getNotebookByName: (notebookName: string) => Notebook | undefined;
   getNotebookBySlug: (slug: string) => Notebook | undefined;
   getListOfNotebooks: () => Notebook[];
-
+  getNotebookNameBySlug: (slug: string) => string | undefined;
   // Canvas
   updateCanvasOfTheNotebook: (scene: SceneData, slug: string) => void;
 
