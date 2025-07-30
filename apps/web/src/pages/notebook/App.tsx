@@ -17,7 +17,11 @@ function Notebook() {
     const [showPlayground, setShowPlayground] = useState(true);
     const [isPlaygroundMaximized, setIsPlaygroundMaximized] = useState(false);
     const [isEditorMaximized, setIsEditorMaximized] = useState(false);
+    const notebookName = useNotebookStore((state) => state.getNotebookNameBySlug(notebookSlug!));
 
+    useEffect(() => {
+        document.title = `${notebookName} - Excalidraw`;
+    }, [notebookSlug, notebookName]);
     useEffect(() => {
         setIsEditorMaximized(showEditor && !showCanvas && !showPlayground);
     }, [showEditor, showCanvas, showPlayground]);
@@ -39,16 +43,13 @@ function Notebook() {
         return <div className="p-4 text-red-500">Notebook slug is required.</div>;
     }
 
-    const notebookName = useNotebookStore((state) => state.getNotebookNameBySlug(notebookSlug));
 
     const togglePlaygroundMaximization = () => {
         setIsPlaygroundMaximized(!isPlaygroundMaximized);
     };
 
     const panelResizeHandleStyle = "w-[1px] bg-stone-200 dark:bg-stone-700 hover:w-2 hover:bg-blue-500 transition-all";
-    useEffect(() => {
-        document.title = `${notebookName} - Excalidraw`;
-    }, [notebookSlug, notebookName]);
+
     return (
         <TooltipProvider>
             <div className="relative h-screen w-screen flex flex-col">
