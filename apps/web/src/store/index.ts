@@ -1,2 +1,4 @@
 import useNotebookStore from "./notebookStore";
-export { useNotebookStore };
+import useCanvasStore from "./canvasStore";
+
+export {useNotebookStore, useCanvasStore};

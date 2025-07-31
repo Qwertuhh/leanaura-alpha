@@ -1,4 +1,3 @@
-import {useNotebookStore} from "@/store";
 import {Excalidraw, MainMenu, WelcomeScreen} from "@excalidraw/excalidraw";
 import type {OrderedExcalidrawElement} from "@excalidraw/excalidraw/element/types";
 import type {ExcalidrawImperativeAPI} from "@excalidraw/excalidraw/types";
@@ -7,6 +6,8 @@ import {useTheme} from "@/components/theme-provider";
 import themeCasting from "@/lib/theme-casting";
 import {useLocation} from "react-router-dom";
 import { loadLibraryFromBlob } from "@excalidraw/excalidraw";
+import {useNotebookStore} from "@/store";
+import {useCanvasStore} from "@/store";
 
 import type {
     AppState,
@@ -33,8 +34,7 @@ interface CanvasComponentProps {
  * listens for changes, updating the corresponding notebook's data in
  * the store if the scene changes.
  */
-
-async function downloadFile(
+async function downloadFileAndLoadLibrary(
     addLibraryDownloadUrl: string,
     excalidrawAPI: ExcalidrawImperativeAPI
 ) {
@@ -47,6 +47,10 @@ async function downloadFile(
         const blob = await response.blob();
         const libraryItems = await loadLibraryFromBlob(blob);
         if (libraryItems) {
+            useCanvasStore
+                .getState()
+                .updateCanvasLibraries(libraryItems);
+            console.log("Library saved");
             excalidrawAPI.updateLibrary({
                 libraryItems,
                 merge: true,
@@ -65,6 +69,10 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
     const {theme} = useTheme();
     const {hash} = useLocation();
 
+    excalidrawAPI?.updateLibrary({
+        libraryItems: useCanvasStore.getState().canvasLibraries!,
+        merge: true,
+    });
     useEffect(() => {
         if (!hash || !excalidrawAPI) return;
 
@@ -73,7 +81,7 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
 
         if (addLibraryUrl) {
             const decodedUrl = decodeURIComponent(addLibraryUrl);
-            downloadFile(decodedUrl, excalidrawAPI);
+            downloadFileAndLoadLibrary(decodedUrl, excalidrawAPI);
         }
     }, [hash, excalidrawAPI]);
 

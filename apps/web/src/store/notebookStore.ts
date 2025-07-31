@@ -1,8 +1,8 @@
 import slugify from "@/lib/slug";
 import {create} from "zustand";
 import {devtools, persist} from "zustand/middleware";
-import type { Notebook, StoreState } from "@/types";
-import type {SceneData} from "@excalidraw/excalidraw/types";
+import type {Notebook, NotebookStoreState} from "@/types";
+import type { SceneData } from "@excalidraw/excalidraw/types";
 
 /**
  * A Zustand store for managing notebooks, providing functionalities to
@@ -25,11 +25,10 @@ import type {SceneData} from "@excalidraw/excalidraw/types";
  * @returns The current state of the notebook store.
  */
 const notebookStore = (
-    set: (fn: (state: StoreState) => Partial<StoreState>) => void,
-    get: () => StoreState
-): StoreState => ({
-    Notebooks: [
-    ],
+    set: (fn: (state: NotebookStoreState) => Partial<NotebookStoreState>) => void,
+    get: () => NotebookStoreState
+): NotebookStoreState => ({
+    Notebooks: [],
 
     /**
      * Replace the current list of notebooks with a new list.
@@ -109,7 +108,26 @@ const notebookStore = (
      *
      * @returns {Notebook[]} An array of notebook objects.
      */
-    getListOfNotebooks: () => get().Notebooks || [],
+    getListOfNotebooks(): Notebook[] {
+        return get().Notebooks || []
+    },
+
+    /**
+     * Update the text content for a given notebook
+     * @param textContent The new text content
+     * @param slug The slug of the notebook to update
+     */
+    updateTextContentOfTheNotebook: (textContent: string, slug: string) => {
+        set((state) => {
+            const notebooks =
+                state.Notebooks?.map((n) =>
+                    n.slug === slug
+                        ? {...n, textContent}
+                        : n
+                ) || [];
+            return {Notebooks: notebooks};
+        });
+    },
 
     /**
      * Update the canvas data for a given notebook
@@ -128,20 +146,8 @@ const notebookStore = (
         });
     },
 
-    updateTextContentOfTheNotebook: (textContent: string, slug: string) => {
-        set((state) => {
-            const notebooks =
-                state.Notebooks?.map((n) =>
-                    n.slug === slug
-                        ? {...n, textContent}
-                        : n
-                ) || [];
-            return {Notebooks: notebooks};
-        });
-    },
 });
-
-const useNotebookStore = create<StoreState>()(devtools(persist(notebookStore, {
+const useNotebookStore = create<NotebookStoreState>()(devtools(persist(notebookStore, {
     name: "notebook-storage",
 })));
 
