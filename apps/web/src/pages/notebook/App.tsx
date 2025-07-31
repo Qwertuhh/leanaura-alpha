@@ -20,7 +20,7 @@ function Notebook() {
     const notebookName = useNotebookStore((state) => state.getNotebookNameBySlug(notebookSlug!));
 
     useEffect(() => {
-        document.title = `${notebookName} - Excalidraw`;
+        document.title = `${notebookName} - toci`;
     }, [notebookSlug, notebookName]);
     useEffect(() => {
         setIsEditorMaximized(showEditor && !showCanvas && !showPlayground);
