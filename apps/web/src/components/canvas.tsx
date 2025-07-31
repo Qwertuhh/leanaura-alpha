@@ -1,17 +1,20 @@
 import {useNotebookStore} from "@/store";
 import {Excalidraw, MainMenu, WelcomeScreen} from "@excalidraw/excalidraw";
 import type {OrderedExcalidrawElement} from "@excalidraw/excalidraw/element/types";
+import type {ExcalidrawImperativeAPI} from "@excalidraw/excalidraw/types";
 import "@excalidraw/excalidraw/index.css";
 import {useTheme} from "@/components/theme-provider";
 import themeCasting from "@/lib/theme-casting";
 import {useLocation} from "react-router-dom";
+import { loadLibraryFromBlob } from "@excalidraw/excalidraw";
 
 import type {
     AppState,
     BinaryFiles,
     SceneData,
 } from "@excalidraw/excalidraw/types";
-import {useEffect, useMemo,  useState} from "react";
+import {useEffect, useMemo, useState} from "react";
+
 interface CanvasComponentProps {
     notebookSlug: string;
 }
@@ -31,40 +34,49 @@ interface CanvasComponentProps {
  * the store if the scene changes.
  */
 
-async function downloadFile(addLibraryDownloadUrl: string) {
+async function downloadFile(
+    addLibraryDownloadUrl: string,
+    excalidrawAPI: ExcalidrawImperativeAPI
+) {
     try {
-        const response = await fetch(addLibraryDownloadUrl!);
-        if (!response.ok) console.error("Failed to fetch library");
+        const response = await fetch(addLibraryDownloadUrl);
+        if (!response.ok) {
+            console.error("Failed to fetch library");
+            return;
+        }
         const blob = await response.blob();
-        console.log("Blob downloaded:", blob);
-        return blob;
+        const libraryItems = await loadLibraryFromBlob(blob);
+        if (libraryItems) {
+            excalidrawAPI.updateLibrary({
+                libraryItems,
+                merge: true,
+            });
+        }
     } catch (e) {
         console.error(e);
     }
 }
+
 function CanvasComponent({notebookSlug}: CanvasComponentProps) {
+    const [excalidrawAPI, setExcalidrawAPI] =
+        useState<ExcalidrawImperativeAPI | null>(null);
+
     const notebookStore = useNotebookStore();
     const {theme} = useTheme();
-    const { hash } = useLocation();
-    const [addLibraryDownloadUrl, setAddLibraryUrl] = useState<string | null>(null);
+    const {hash} = useLocation();
+
     useEffect(() => {
-        if (!hash) return;
+        if (!hash || !excalidrawAPI) return;
 
-        // 1. Remove leading '#'
-        const raw = hash.slice(1);
+        const params = new URLSearchParams(hash.slice(1));
+        const addLibraryUrl = params.get("addLibrary");
 
-        // 2. Build URLSearchParams
-        const params = new URLSearchParams(raw);
-
-        // 3. Get and decode the addLibrary param
-        const encoded = params.get('addLibrary');
-        if (encoded) {
-            setAddLibraryUrl(decodeURIComponent(encoded ?? ""));
+        if (addLibraryUrl) {
+            const decodedUrl = decodeURIComponent(addLibraryUrl);
+            downloadFile(decodedUrl, excalidrawAPI);
         }
-        console.log(addLibraryDownloadUrl);
-        downloadFile(addLibraryDownloadUrl!);
+    }, [hash, excalidrawAPI]);
 
-    }, [hash, addLibraryDownloadUrl]);
     const canvasScene: SceneData = useMemo(() => {
         if (!notebookSlug) return null;
         return JSON.parse(
@@ -117,34 +129,34 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
     };
 
 
-
     return (
         <div className="h-[var(--component-height)]">
             <Excalidraw
                 initialData={canvasScene}
                 theme={themeCasting(theme)}
+                excalidrawAPI={(api) => setExcalidrawAPI(api)}
                 onChange={(excalidrawElements, appState, files) => {
                     handleSceneChange(excalidrawElements, appState, files);
                 }}
             >
                 <MainMenu>
                     <MainMenu.Group title="Excalidraw items">
-                        <MainMenu.DefaultItems.LoadScene />
-                        <MainMenu.DefaultItems.SaveToActiveFile />
-                        <MainMenu.DefaultItems.Export />
-                        <MainMenu.DefaultItems.SaveAsImage />
-                        <MainMenu.DefaultItems.Help />
-                        <MainMenu.DefaultItems.ClearCanvas />
-                        <MainMenu.DefaultItems.ToggleTheme />
-                        <MainMenu.DefaultItems.ChangeCanvasBackground />
+                        <MainMenu.DefaultItems.LoadScene/>
+                        <MainMenu.DefaultItems.SaveToActiveFile/>
+                        <MainMenu.DefaultItems.Export/>
+                        <MainMenu.DefaultItems.SaveAsImage/>
+                        <MainMenu.DefaultItems.Help/>
+                        <MainMenu.DefaultItems.ClearCanvas/>
+                        <MainMenu.DefaultItems.ToggleTheme/>
+                        <MainMenu.DefaultItems.ChangeCanvasBackground/>
                     </MainMenu.Group>
                 </MainMenu>
                 <WelcomeScreen>
                     <WelcomeScreen.Hints.ToolbarHint>
                         <p> ToolBar Hints </p>
                     </WelcomeScreen.Hints.ToolbarHint>
-                    <WelcomeScreen.Hints.MenuHint />
-                    <WelcomeScreen.Hints.HelpHint />
+                    <WelcomeScreen.Hints.MenuHint/>
+                    <WelcomeScreen.Hints.HelpHint/>
                 </WelcomeScreen>
             </Excalidraw>
         </div>
