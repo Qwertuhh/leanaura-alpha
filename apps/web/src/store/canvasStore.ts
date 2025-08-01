@@ -46,7 +46,7 @@ const notebookStore = (
         });
     },
 
-    deleteFromCanvasLibraries: (itemIds: string[]) => {
+    deleteCanvasLibrary: (itemIds: string[]) => {
         set((state) => {
             if (!state.canvasLibraries) return {};
             return {
@@ -56,7 +56,9 @@ const notebookStore = (
             };
         });
     },
-
+    clearCanvasLibraries: () => {
+        set(() => ({canvasLibraries: null}));
+    },
     getCanvasLibraries: () => {
         return get().canvasLibraries;
     },
@@ -64,7 +66,7 @@ const notebookStore = (
 });
 
 const useCanvasStore = create<CanvasStoreState>()(devtools(persist(notebookStore, {
-    name: "notebook-storage",
+    name: "canvas-storage",
 })));
 
 export default useCanvasStore;

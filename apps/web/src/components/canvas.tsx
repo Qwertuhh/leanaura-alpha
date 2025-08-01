@@ -1,13 +1,14 @@
-import {Excalidraw, MainMenu, WelcomeScreen} from "@excalidraw/excalidraw";
+import {Excalidraw, MainMenu, WelcomeScreen, DefaultSidebar} from "@excalidraw/excalidraw";
 import type {OrderedExcalidrawElement} from "@excalidraw/excalidraw/element/types";
 import type {ExcalidrawImperativeAPI} from "@excalidraw/excalidraw/types";
 import "@excalidraw/excalidraw/index.css";
 import {useTheme} from "@/components/theme-provider";
 import themeCasting from "@/lib/theme-casting";
 import {useLocation} from "react-router-dom";
-import { loadLibraryFromBlob } from "@excalidraw/excalidraw";
+import {loadLibraryFromBlob} from "@excalidraw/excalidraw";
 import {useNotebookStore} from "@/store";
 import {useCanvasStore} from "@/store";
+import {RotateCcw} from "lucide-react";
 
 import type {
     AppState,
@@ -49,7 +50,7 @@ async function downloadFileAndLoadLibrary(
         if (libraryItems) {
             useCanvasStore
                 .getState()
-                .updateCanvasLibraries(libraryItems);
+                .appendToCanvasLibraries(libraryItems);
             console.log("Library saved");
             excalidrawAPI.updateLibrary({
                 libraryItems,
@@ -69,10 +70,17 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
     const {theme} = useTheme();
     const {hash} = useLocation();
 
-    excalidrawAPI?.updateLibrary({
-        libraryItems: useCanvasStore.getState().canvasLibraries!,
-        merge: true,
-    });
+    const canvasLibraries = useCanvasStore(state => state.canvasLibraries);
+
+    useEffect(() => {
+        if (excalidrawAPI && canvasLibraries) {
+            excalidrawAPI.updateLibrary({
+                libraryItems: canvasLibraries,
+                merge: true,
+            });
+        }
+    }, [excalidrawAPI, canvasLibraries]);
+
     useEffect(() => {
         if (!hash || !excalidrawAPI) return;
 
@@ -81,6 +89,7 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
 
         if (addLibraryUrl) {
             const decodedUrl = decodeURIComponent(addLibraryUrl);
+
             downloadFileAndLoadLibrary(decodedUrl, excalidrawAPI);
         }
     }, [hash, excalidrawAPI]);
@@ -136,7 +145,20 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
         }
     };
 
+    const onResetLibraries = () => {
+        if (!excalidrawAPI) return;
+        excalidrawAPI?.updateLibrary({
+            libraryItems: [],
+            merge: true,
+        });
+        useCanvasStore
+            .getState()
+            .clearCanvasLibraries();
+        console.log("Libraries reset");
 
+        //* Reload the page to reset the canvas and libraries state in a component
+        window.location.reload();
+    }
     return (
         <div className="h-[var(--component-height)]">
             <Excalidraw
@@ -155,9 +177,14 @@ function CanvasComponent({notebookSlug}: CanvasComponentProps) {
                         <MainMenu.DefaultItems.SaveAsImage/>
                         <MainMenu.DefaultItems.Help/>
                         <MainMenu.DefaultItems.ClearCanvas/>
+                        <MainMenu.Item  icon={<RotateCcw/>} onSelect={onResetLibraries}>
+                            Reset libraries
+                        </MainMenu.Item>
                         <MainMenu.DefaultItems.ToggleTheme/>
                         <MainMenu.DefaultItems.ChangeCanvasBackground/>
                     </MainMenu.Group>
+                    <DefaultSidebar/>
+
                 </MainMenu>
                 <WelcomeScreen>
                     <WelcomeScreen.Hints.ToolbarHint>

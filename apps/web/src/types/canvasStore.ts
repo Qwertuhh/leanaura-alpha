@@ -5,7 +5,8 @@ interface CanvasStoreState {
 
     updateCanvasLibraries: (libraries: LibraryItems) => void;
     appendToCanvasLibraries: (newItems: LibraryItems) => void;
-    deleteFromCanvasLibraries: (itemIds: string[]) => void;
+    deleteCanvasLibrary: (itemIds: string[]) => void;
+    clearCanvasLibraries: () => void;
     getCanvasLibraries: () => LibraryItems | null;
 }
 
