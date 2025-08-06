@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from typing import Generator
 from const.ai_prompts import  ai_stream_chat_prompt
-
+from controllers.ai_agent import app
 load_dotenv()
 
 client = OpenAI(
@@ -24,6 +24,9 @@ def stream_chat_response(prompt: str) -> Generator[str, None, None]:
         str: The content of the chat response in chunks as it is streamed.
 
     """
+    result = app.invoke({"name": "Arihant"})
+    print(result.get("greeting"))
+
     response = client.chat.completions.create(
         model="gemini-2.0-flash",
         messages=[
@@ -36,4 +39,3 @@ def stream_chat_response(prompt: str) -> Generator[str, None, None]:
         delta = chunk.choices[0].delta.content
         if delta:
             yield delta
-
