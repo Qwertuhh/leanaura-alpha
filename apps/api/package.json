@@ -1,8 +1,10 @@
 {
   "name": "api",
+  "version": "1.0.0",
+  "repository": "https://github.com/qwertuhh/toci-alpha",
   "scripts": {
-    "dev": "uv run scripts/dev.py",
-    "build": "uv run scripts/build.py",
-    "start": "uv run scripts/start.py"
+    "dev": "uv run dev",
+    "build": "uv run build",
+    "start": "uv run dev"
   }
 }
