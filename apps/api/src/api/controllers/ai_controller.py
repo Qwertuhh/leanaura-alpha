@@ -1,12 +1,14 @@
-from openai import OpenAI
 import os
-from dotenv import load_dotenv
 from typing import Generator
 from api.const.ai_prompts import  ai_stream_chat_prompt
-from api.controllers.ai_agent import app
-load_dotenv()
+from langfuse import get_client
+from langfuse.openai import openai
 
-client = OpenAI(
+langfuse = get_client()
+
+
+
+client = openai.OpenAI(
     api_key=os.getenv("GEMINI_API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
@@ -24,16 +26,23 @@ def stream_chat_response(prompt: str) -> Generator[str, None, None]:
         str: The content of the chat response in chunks as it is streamed.
 
     """
-    result = app.invoke({"name": "Arihant"})
-    print(result.get("greeting"))
 
+    # Create chat completion with proper configuration for Gemini
     response = client.chat.completions.create(
-        model="gemini-2.0-flash",
+        model="gemini-pro",  # type: ignore  # Using Gemini Pro model
         messages=[
             {"role": "system", "content": ai_stream_chat_prompt},
             {"role": "user", "content": prompt}
         ],
-        stream=True
+        stream=True,
+        
+        # Langfuse metadata for tracking
+        metadata={
+            "session_id": "session_123",
+            "user_id": "user_456",
+            "tags": ["production", "chat-bot"],
+            "custom_field": "additional metadata"
+        }
     )
     for chunk in response:
         delta = chunk.choices[0].delta.content

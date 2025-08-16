@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "repository": "https://github.com/qwertuhh/toci-alpha",
   "scripts": {
-    "dev": "uv run dev",
+    "dev": "uv run serve --dev",
     "build": "uv run build",
-    "start": "uv run dev"
+    "start": "uv run serve"
   }
 }
