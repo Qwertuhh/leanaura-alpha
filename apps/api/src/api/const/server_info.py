@@ -1,9 +1,5 @@
 version = "1.0.0"
-description = """
-Toci－Alpha API 🚀
-
-This is a API of a project built to provide all-time available resources and teachers to guide you in your learning path
-"""
+description = """This is a API 🚀 server of a project built to provide all-time available resources and teachers to guide you in your learning path"""
 server_info = {
     "title": "Toci‑Alpha Server",
     "description": description,
