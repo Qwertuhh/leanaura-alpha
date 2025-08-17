@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.const.server_info import server_info
+from api.routers.ai_agent import router as ai_agent_router
 
 def create_app() -> FastAPI:
     app = FastAPI(
@@ -19,7 +20,7 @@ def create_app() -> FastAPI:
     @app.get("/", tags=["Server Info"])
     async def get_server_info():
         return server_info
-
+    app.include_router(ai_agent_router, prefix="/api/v1", tags=["AI Agent"])
     print("\nAPI initialized!")
     return app
 
