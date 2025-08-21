@@ -1,14 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.const.server_info import server_info
-from api.routers.ai_agent.route import router as ai_agent_router, sio
-import socketio
+from api.routers.ai_agent import router as ai_agent_router
 
 def create_app() -> FastAPI:
     app = FastAPI(
         **server_info
     )
-    app_socket = socketio.ASGIApp(sio, app)
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
