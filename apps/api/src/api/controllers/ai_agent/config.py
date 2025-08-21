@@ -4,7 +4,7 @@ from langfuse import get_client
 from langfuse.langchain import CallbackHandler
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# Initialize Langfuse for monitoring
+# * Initialize Langfuse for monitoring
 langfuse = get_client()
 langfuse_handler = CallbackHandler()
 
@@ -30,14 +30,13 @@ def get_llm(api_key: Optional[str] = None, model: str = "gemini-2.5-flash"):
     return ChatGoogleGenerativeAI(
         model=model,
         google_api_key=api_key,
-        temperature=0.2,  # Slight randomness for creativity
+        temperature=0.2,
         top_p=0.95,
         top_k=40,
         timeout=60,  # seconds
         max_retries=3,
-        streams=True,
     )
 
 
-# Initialize the default LLM instance
+# * Initialize the default LLM instance
 llm = get_llm().bind_tools([])
