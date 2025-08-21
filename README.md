@@ -3,7 +3,7 @@
 
 This is a project built to provide all-time available resources and teachers to guide you in your learning path
 
-> [!ALERT]
+> [!IMPORTANT]
 > - Shifting our tech stack to Next.js
 
 > [!WARNING]
