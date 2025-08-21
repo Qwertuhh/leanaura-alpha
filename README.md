@@ -1,5 +1,10 @@
 # leanaura-alpha
+![banner](public/leanaura-alpha.png)
+
 This is a project built to provide all-time available resources and teachers to guide you in your learning path
+
+> [!ALERT]
+> - Shifting our tech stack to Next.js
 
 > [!WARNING]
 > - It's an alpha version
