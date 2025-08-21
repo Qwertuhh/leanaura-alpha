@@ -1,4 +1,4 @@
-# toci-alpha
+# leanaura-alpha
 This is a project built to provide all-time available resources and teachers to guide you in your learning path
 
 > [!WARNING]
