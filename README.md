@@ -1,5 +1,5 @@
 # leanaura-alpha
-![banner](public/leanaura-alpha.png)
+![banner](public/leanaura-alpha-github-banner.png)
 
 This is a project built to provide all-time available resources and teachers to guide you in your learning path
 
