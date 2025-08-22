@@ -1,4 +1,0 @@
-:root {
-  --header-height: 6vh;
-  --component-height: calc(100vh - var(--header-height));
-}
