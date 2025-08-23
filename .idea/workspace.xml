@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d06a22e1-a2c5-463f-9da0-09b365416960" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+        <option value="Python Script" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Turbobot &lt;turbobot@vercel.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
+    {
+      &quot;reviewState&quot;: &quot;AWAITING_REVIEW&quot;
+    }
+  ],
+  &quot;lastFilter&quot;: {
+    &quot;reviewState&quot;: &quot;AWAITING_REVIEW&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Qwertuhh/leanaura-alpha.git&quot;,
+    &quot;accountId&quot;: &quot;eec3424e-dc0b-4c68-9a29-0ca7761d8568&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="303EBtKVFdZ0NFhE6TPhpCgToak" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker_scripts/docker_compose.yml.n8n: Compose Deployment.executor": "Run",
+    "Docker.docker_scripts/docker_compose.yml.postgres: Compose Deployment.executor": "Run",
+    "Docker.docker_scripts_toci_alpha/docker_compose.yml.postgres: Compose Deployment.executor": "Run",
+    "Docker.docker_scripts_toci_alpha/docker_compose.yml: Compose Deployment.executor": "Run",
+    "JavaScript Debug.localhost:3001.executor": "Debug",
+    "JavaScript Debug.localhost:5173.executor": "Debug",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHELLCHECK.PATH": "C:\\Users\\Dell\\AppData\\Roaming\\JetBrains\\WebStorm2025.1\\plugins\\Shell Script\\shellcheck.exe",
+    "git-widget-placeholder": "nextjs/migrate",
+    "ignore.virus.scanning.warn.message": "true",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "D:/ME/CODE/Projects/leanaura-alpha/src/app",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.Next.js: server-side.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "D:\\ME\\CODE\\Projects\\leanaura-alpha\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\app" />
+      <recent name="D:\ME\CODE\Projects\toci-alpha\public" />
+      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web" />
+      <recent name="D:\ME\CODE\Projects\toci-alpha" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\app\" />
+      <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\app" />
+      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web\src\styles\markdown" />
+      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web\src" />
+      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web\src\assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Next.js: server-side">
+    <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
+      <method v="2" />
+    </configuration>
+    <configuration name="localhost:5173" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:5173">
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker_scripts/docker_compose.yml.n8n: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="n8n" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker_scripts/docker_compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker_scripts/docker_compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker_scripts/docker_compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker_scripts_toci_alpha/docker_compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker_scripts_toci_alpha/docker_compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker_scripts_toci_alpha/docker_compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker_scripts_toci_alpha/docker_compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="Next.js: server-side" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker_scripts_toci_alpha/docker_compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker_scripts_toci_alpha/docker_compose.yml.postgres: Compose Deployment" />
+        <item itemvalue="Docker.docker_scripts/docker_compose.yml.postgres: Compose Deployment" />
+        <item itemvalue="Docker.docker_scripts/docker_compose.yml.n8n: Compose Deployment" />
+        <item itemvalue="JavaScript Debug.localhost:5173" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-WS-251.26927.40" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d06a22e1-a2c5-463f-9da0-09b365416960" name="Changes" comment="" />
+      <created>1752847747585</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1752847747585</updated>
+      <workItem from="1752847759441" duration="3904000" />
+      <workItem from="1752851768616" duration="4315000" />
+      <workItem from="1753189140117" duration="212000" />
+      <workItem from="1753192542553" duration="120000" />
+      <workItem from="1753274808631" duration="10519000" />
+      <workItem from="1753287717953" duration="1548000" />
+      <workItem from="1753360654061" duration="13378000" />
+      <workItem from="1753446864141" duration="1767000" />
+      <workItem from="1753450636729" duration="9106000" />
+      <workItem from="1753533680539" duration="8235000" />
+      <workItem from="1753543735166" duration="3928000" />
+      <workItem from="1753619448226" duration="4828000" />
+      <workItem from="1753629324337" duration="5772000" />
+      <workItem from="1753706480474" duration="596000" />
+      <workItem from="1753707179133" duration="12344000" />
+      <workItem from="1753801087520" duration="6277000" />
+      <workItem from="1753879601675" duration="1780000" />
+      <workItem from="1753886827074" duration="6381000" />
+      <workItem from="1753966231578" duration="3882000" />
+      <workItem from="1753974235761" duration="5154000" />
+      <workItem from="1754051316433" duration="6203000" />
+      <workItem from="1754316539669" duration="548000" />
+      <workItem from="1754317456746" duration="1028000" />
+      <workItem from="1754318577224" duration="939000" />
+      <workItem from="1754319954385" duration="413000" />
+      <workItem from="1754320458129" duration="3582000" />
+      <workItem from="1754398116763" duration="583000" />
+      <workItem from="1754404151026" duration="3591000" />
+      <workItem from="1754483752793" duration="715000" />
+      <workItem from="1754484796509" duration="567000" />
+      <workItem from="1754491329127" duration="3846000" />
+      <workItem from="1755781528155" duration="3381000" />
+      <workItem from="1755866565881" duration="4198000" />
+      <workItem from="1755952737138" duration="5313000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat(create-turbo): apply package-manager transform">
+      <option name="closed" value="true" />
+      <created>1752852397065</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1752852397065</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(create-turbo): apply package-manager transform">
+      <option name="closed" value="true" />
+      <created>1752855841819</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1752855841819</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: MIT License added">
+      <option name="closed" value="true" />
+      <created>1753276044971</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1753276044971</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Refactor the code and version fix">
+      <option name="closed" value="true" />
+      <created>1753289131536</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753289131537</updated>
+    </task>
+    <task id="LOCAL-00005" summary="metadata of the app added, type fix in sonner component">
+      <option name="closed" value="true" />
+      <created>1753366232856</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1753366232856</updated>
+    </task>
+    <task id="LOCAL-00006" summary="upgrade license to Apache-2.0">
+      <option name="closed" value="true" />
+      <created>1753371628366</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1753371628368</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1753371717638</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1753371717638</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Enhanced readme.md and added WARRANTY.md">
+      <option name="closed" value="true" />
+      <created>1753373455167</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1753373455167</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Remove todo.md">
+      <option name="closed" value="true" />
+      <created>1753374037124</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1753374037124</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.py" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(create-turbo): apply package-manager transform" />
+    <MESSAGE value="feat: MIT License added" />
+    <MESSAGE value="Refactor the code and version fix" />
+    <MESSAGE value="code block rendering inside table component fixed" />
+    <MESSAGE value="metadata of the app added, type fix in sonner component" />
+    <MESSAGE value="upgrade license to Apache-2.0" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <MESSAGE value="Enhanced readme.md" />
+    <MESSAGE value="Enhanced readme.md and added WARRANTY.md" />
+    <MESSAGE value="Revert &quot;Remove .turbo file&quot;&#10;&#10;This reverts commit 341a8b80ff3c8f8141cc2f1578e3380d27bda5ea." />
+    <MESSAGE value="Remove todo.md" />
+    <MESSAGE value="packages issue fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+</project>

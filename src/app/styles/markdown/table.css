@@ -1,0 +1,55 @@
+#markdown .table-wrapper td code,
+#markdown .table-wrapper th code {
+    padding: 0.2rem 0.4rem;
+    margin: 0.2rem;
+    font-size: 0.8em;
+    white-space: nowrap;
+    background-color: var(--color-card);
+    border-radius: 0.2rem;
+}
+
+#markdown table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+}
+
+#markdown td, #markdown th {
+    border: 1px solid var(--color-border);
+    color: var(--color-foreground);
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 1em;
+}
+
+@media (min-width: 768px) {
+    #markdown .table-wrapper {
+        overflow: auto;
+    }
+
+    #markdown .table-wrapper table {
+        width: 100%;
+    }
+
+    #markdown .table-wrapper td,
+    #markdown .table-wrapper th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    #markdown .table-wrapper td:first-child,
+    #markdown .table-wrapper th:first-child {
+        left: 0;
+    }
+
+    #markdown .table-wrapper tbody tr {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    #markdown .table-wrapper td:first-child {
+        background-color: var(--color-background);
+    }
+}
