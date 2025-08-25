@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d06a22e1-a2c5-463f-9da0-09b365416960" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/leanaura_icon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/components/rich-text-editor/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/rich-text-editor/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/notebooks/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/notebooks/page.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="d06a22e1-a2c5-463f-9da0-09b365416960" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,11 +97,11 @@
       <recent name="D:\ME\CODE\Projects\toci-alpha" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\lib" />
+      <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\components" />
+      <recent name="D:\ME\CODE\Projects\leanaura-alpha\src" />
       <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\app\" />
       <recent name="D:\ME\CODE\Projects\leanaura-alpha\src\app" />
-      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web\src\styles\markdown" />
-      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web\src" />
-      <recent name="D:\ME\CODE\Projects\toci-alpha\apps\web\src\assets" />
     </key>
   </component>
   <component name="RunManager">
@@ -170,6 +161,7 @@
       <workItem from="1755866565881" duration="4198000" />
       <workItem from="1755952737138" duration="8558000" />
       <workItem from="1756037221837" duration="3109000" />
+      <workItem from="1756126481522" duration="9687000" />
     </task>
     <task id="LOCAL-00001" summary="feat(create-turbo): apply package-manager transform">
       <option name="closed" value="true" />
