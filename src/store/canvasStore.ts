@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import {devtools, persist} from "zustand/middleware";
-import type {CanvasStoreState} from "@/app/types";
+import type {CanvasStoreState} from "@/types";
 import type {LibraryItems} from "@excalidraw/excalidraw/types";
 
 /**

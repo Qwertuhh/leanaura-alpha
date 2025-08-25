@@ -1,7 +1,7 @@
 "use client";
 
-import { useNotebookStore } from "@/app/store";
-import { NotebookStoreState } from "@/app/types";
+import { useNotebookStore } from "@/store";
+import { NotebookStoreState } from "@/types";
 
 function App() {
   const notebookStore = useNotebookStore();

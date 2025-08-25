@@ -1,4 +1,0 @@
-/* Remove 'Rest libraries' button from library menu. Excalidraw will eventually drop this button: https://github.com/excalidraw/excalidraw/issues/2346 */
-.excalidraw .library-menu-items-container .dropdown-menu-container button:nth-child(3) {
-    display: none !important;
-}
