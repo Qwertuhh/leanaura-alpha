@@ -2,6 +2,7 @@
 
 import { useNotebookStore } from "@/store";
 import { NotebookStoreState } from "@/types";
+import Image from "next/image"
 
 function App() {
   const notebookStore = useNotebookStore();
@@ -15,7 +16,7 @@ function App() {
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-44 pt-20">
       <div className="flex flex-col items-center gap-4">
-        <img src="/leanaura_icon.svg" alt="leanaura logo" className="w-20 h-20 bg-white m-2 p-2 rounded" />
+        <Image src="/leanaura_icon.svg" alt="leanaura logo" className="w-20 h-20 bg-white m-2 p-2 rounded" />
         <h1 className="text-6xl font-extrabold">LeanAura</h1>
         <p className="text-sm text-muted-foreground">This is a solution built to provide all-time available resources and teachers to guide you in your learning path
         </p>
