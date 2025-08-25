@@ -5,6 +5,7 @@ This is a project built to provide all-time available resources and teachers to 
 
 > [!IMPORTANT]
 > - Shifting our tech stack to Next.js
+> - Working on its UI design
 
 > [!WARNING]
 > - It's an alpha version
