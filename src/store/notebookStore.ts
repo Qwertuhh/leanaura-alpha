@@ -1,7 +1,7 @@
-import slugify from "@/app/lib/slug";
+import slugify from "@/lib/slug";
 import {create} from "zustand";
 import {devtools, persist} from "zustand/middleware";
-import type {Notebook, NotebookStoreState} from "@/app/types";
+import type {Notebook, NotebookStoreState} from "@/types";
 import type { SceneData } from "@excalidraw/excalidraw/types";
 
 /**
