@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic";
+
+
 import {MainMenu, WelcomeScreen, DefaultSidebar} from "@excalidraw/excalidraw";
 import type {OrderedExcalidrawElement} from "@excalidraw/excalidraw/element/types";
 import type {ExcalidrawImperativeAPI} from "@excalidraw/excalidraw/types";

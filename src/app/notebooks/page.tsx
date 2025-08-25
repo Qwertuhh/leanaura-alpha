@@ -2,21 +2,27 @@
 
 import { useNotebookStore } from "@/app/store";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useState, useEffect } from "react";
 import { Notebook } from "@/app/types";
 
 function Notebooks() {
+  const [isMounted, setIsMounted] = useState(false);
   const notebookStore = useNotebookStore();
-  const notebooks = useMemo(
-    () => notebookStore.getListOfNotebooks(),
-    [notebookStore]
-  );
+  const [notebooks, setNotebooks] = useState<Notebook[]>([]);
+  
   const createNotebook = useNotebookStore((state) => state.createNotebook);
   const deleteNotebook = useNotebookStore((state) => state.deleteNotebook);
   const renameNotebook = useNotebookStore((state) => state.renameNotebook);
 
   const [newNotebookName, setNewNotebookName] = useState("");
   const [newName, setNewName] = useState("");
+  
+  // Handle hydration by only showing content after mount
+  useEffect(() => {
+    setIsMounted(true);
+    // Update notebooks after mount to ensure client-side state is in sync
+    setNotebooks(notebookStore.getListOfNotebooks());
+  }, [notebookStore]);
 
   return (
     <div className="flex flex-col gap-6 p-4">
@@ -45,13 +51,15 @@ function Notebooks() {
       </div>
 
       {/* 📚 App List */}
-      {notebooks.length === 0 ? (
+      {!isMounted ? (
+        <div>Loading...</div>
+      ) : notebooks.length === 0 ? (
         <div className="text-stone-600 dark:text-stone-300">
           No notebooks available.
         </div>
       ) : (
         <ul className="flex flex-col gap-2">
-          {notebooks.map((notebook: Notebook) => {
+          {notebooks.map((notebook) => {
             return (
               <li
                 key={notebook.slug}
